@@ -1,5 +1,7 @@
 package com.example.wisesaying;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -8,6 +10,7 @@ public class App {
         System.out.println("==명언 SSG ==");
 
         Scanner sc = new Scanner(System.in);
+        List<WiseSaying> wiseSayings = new ArrayList<>();
         int wiseSayingLastId = 0;
 
 
@@ -26,7 +29,7 @@ public class App {
                     int id = ++wiseSayingLastId;
 
                     WiseSaying wiseSaying = new WiseSaying(id, content, author);
-                    System.out.println(wiseSaying);
+                    wiseSayings.add(wiseSaying);
 
                     System.out.printf("%d번 명언이 등록되었습니다.\n", id);
                     break;
