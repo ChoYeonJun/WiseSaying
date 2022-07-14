@@ -11,7 +11,7 @@ public class Rq {
         this.path = urlBits[0];
 
         if(urlBits.length == 2){
-            this.queryStr = urlBits[0];
+            this.queryStr = urlBits[1];
         }
     }
 

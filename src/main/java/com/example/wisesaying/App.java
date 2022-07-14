@@ -79,13 +79,13 @@ public class App {
         }
 
         if(wiseSaying_ == null){
-            System.out.printf("%d 명언은 존재하지 않습니다.", paramId);
+            System.out.printf("%d 명언은 존재하지 않습니다.\n", paramId);
             return ;
         }
 
         wiseSayings.remove(wiseSaying_);
 
-        System.out.printf("%d 명언이 삭제 되었습니다.", paramId);
+        System.out.printf("%d 명언이 삭제 되었습니다.\n", paramId);
     }
 
 }
