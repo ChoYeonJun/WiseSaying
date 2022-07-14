@@ -2,8 +2,7 @@ package com.example.wisesaying;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,5 +32,20 @@ public class AppTest {
         assertEquals("등록", cmd1);
         assertEquals("명언 1", cmd2);
         assertEquals("작가 1", cmd3);
+    }
+
+    @Test
+    public void 표준출력을_리다이렉션하여_결과_문자열() throws IOException{
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+
+        System.out.println("안녕");
+
+        String rs = output.toString().trim();
+
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+        output.close();
+
+        assertEquals("안녕", rs);
     }
 }
