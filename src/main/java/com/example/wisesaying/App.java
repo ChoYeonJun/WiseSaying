@@ -1,3 +1,5 @@
+package com.example.wisesaying;
+
 import java.util.Scanner;
 
 public class App {

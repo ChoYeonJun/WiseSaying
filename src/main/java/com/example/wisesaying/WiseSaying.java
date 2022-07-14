@@ -1,3 +1,5 @@
+package com.example.wisesaying;
+
 public class WiseSaying {
     int id;
     String content;
