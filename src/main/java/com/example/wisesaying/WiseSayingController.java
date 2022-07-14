@@ -6,13 +6,12 @@ import java.util.Scanner;
 
 public class WiseSayingController {
     private Scanner sc;
-    private List<WiseSaying> wiseSayings;
-    private int wiseSayingLastId;
+
+    private WiseSayingRepository wiseSayingRepository;
 
     public WiseSayingController(Scanner sc) {
         this.sc = sc;
-        this.wiseSayings = new ArrayList<>();
-        this.wiseSayingLastId = 0;
+        wiseSayingRepository = new WiseSayingRepository();
     }
 
     public void Create(Rq rq){
@@ -21,10 +20,10 @@ public class WiseSayingController {
 
         System.out.print("작가 : ");
         String author = sc.nextLine().trim();
-        int id = ++wiseSayingLastId;
+        int id = ++wiseSayingRepository.wiseSayingLastId;
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
-        wiseSayings.add(wiseSaying);
+        wiseSayingRepository.wiseSayings.add(wiseSaying);
 
         System.out.printf("%d번 명언이 등록되었습니다.\n", id);
     }
@@ -32,8 +31,10 @@ public class WiseSayingController {
     public void Read(Rq rq){
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------");
-        for(int i = wiseSayings.size() -1 ; i >= 0; i-- )
-            System.out.printf("%d / %s / %s\n", wiseSayings.get(i).id, wiseSayings.get(i).content, wiseSayings.get(i).author);
+        for(int i = wiseSayingRepository.wiseSayings.size() -1 ; i >= 0; i-- ) {
+            WiseSaying wiseSaying = wiseSayingRepository.wiseSayings.get(i);
+            System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.content, wiseSaying.author);
+        }
     }
 
     public void Update(Rq rq) {
@@ -45,7 +46,7 @@ public class WiseSayingController {
         }
 
 
-        WiseSaying wiseSaying_ = findById(paramId);
+        WiseSaying wiseSaying_ = wiseSayingRepository.findById(paramId);
 
         if(wiseSaying_ == null){
             System.out.printf("%d 명언은 존재하지 않습니다.\n", paramId);
@@ -72,22 +73,17 @@ public class WiseSayingController {
         }
 
 
-        WiseSaying wiseSaying_ = findById(paramId);
+        WiseSaying wiseSaying_ = wiseSayingRepository.findById(paramId);
 
         if(wiseSaying_ == null){
             System.out.printf("%d 명언은 존재하지 않습니다.\n", paramId);
             return ;
         }
 
-        wiseSayings.remove(wiseSaying_);
+        wiseSayingRepository.wiseSayings.remove(wiseSaying_);
 
         System.out.printf("%d 명언이 삭제 되었습니다.\n", paramId);
     }
 
-    private WiseSaying findById(int paramId){
-        for(WiseSaying wiseSaying: wiseSayings){
-            if(wiseSaying.id == paramId) return wiseSaying;
-        }
-        return null;
-    }
+
 }
