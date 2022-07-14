@@ -31,6 +31,9 @@ public class App {
                 case "목록" :
                     Read(rq);
                     break;
+                case "수정" :
+                    Update(rq);
+                    break;
                 case "삭제" :
                     Delete(rq);
                     break;
@@ -40,6 +43,7 @@ public class App {
             }
         }
     }
+
 
     private void Create(Rq rq){
         System.out.print("명언 : ");
@@ -61,6 +65,33 @@ public class App {
         for(int i = wiseSayings.size() -1 ; i >= 0; i-- )
             System.out.printf("%d / %s / %s\n", wiseSayings.get(i).id, wiseSayings.get(i).content, wiseSayings.get(i).author);
     }
+
+    private void Update(Rq rq) {
+        int paramId = rq.getIntParam("id", 0);
+
+        if(paramId == 0){
+            System.out.println("id를 입력해주세요.");
+            return ;
+        }
+
+
+        WiseSaying wiseSaying_ = findById(paramId);
+
+        if(wiseSaying_ == null){
+            System.out.printf("%d 명언은 존재하지 않습니다.\n", paramId);
+            return ;
+        }
+
+        System.out.printf("명언(기존) : %s\n", wiseSaying_.content);
+        System.out.printf("명언 : ");
+        wiseSaying_.content = sc.nextLine();
+        System.out.printf("작가(기존) : %s\n", wiseSaying_.author);
+        System.out.printf("작가 : ");
+        wiseSaying_.author = sc.nextLine();
+
+        System.out.printf("%d번 명언이 수정되었습니다.\n", paramId);
+    }
+
 
     private void Delete(Rq rq){
         int paramId = rq.getIntParam("id", 0);

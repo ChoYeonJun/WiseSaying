@@ -10,13 +10,20 @@ public class Rq {
     Map<String, String> queryParams;
 
     /**
-     * String url
+     * @param String url
      * C - 등록
      * R - 목록
      * U - ??
      * D - 삭제?id=1
      */
 
+    /**
+     * path
+     * 등록
+     * 목록
+     * 수정
+     * 삭제
+     */
     public Rq(String url) {
         this.url = url;
         String[] urlBits = url.split("\\?", 2);
@@ -45,7 +52,7 @@ public class Rq {
     }
 
     public int getIntParam(String paramName, int defaultValue) {
-        if(queryParams.containsKey(paramName)){
+        if(!queryParams.containsKey(paramName)){
             return defaultValue;
         }
         String paramValue = queryParams.get(paramName);
