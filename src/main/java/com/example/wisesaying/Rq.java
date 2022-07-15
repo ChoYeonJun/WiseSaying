@@ -7,7 +7,7 @@ public class Rq {
     String url;
     String path;
 
-    Map<String, String> queryParams;
+    private Map<String, String> queryParams;
 
     /**
      * @param String url
