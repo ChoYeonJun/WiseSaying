@@ -74,27 +74,27 @@ public class ControllerTest {
         assertTrue(rs.contains("2 / 명언 2 / 작가 2"));
     }
 
-//    @Test
-//    public void Id로_element_찾기(){
-//        String input = """
-//                등록
-//                명언 1
-//                작가 1
-//                등록
-//                명언 2
-//                작가 2
-//                목록
-//                종료
-//                """.stripIndent();
-//
-//        String rs = AppTestRunner.run(input);
-//
-//        WiseSaying wiseSaying = AppTestRunner.app.findById(1);
-//
-//        assertEquals(wiseSaying.author,"작가 1");
-//        assertEquals(wiseSaying.content,"명언 1");
-//
-//    }
+    @Test
+    public void Id로_element_찾기(){
+        String input = """
+                등록
+                명언 1
+                작가 1
+                등록
+                명언 2
+                작가 2
+                목록
+                종료
+                """.stripIndent();
+
+        String rs = AppTestRunner.run(input);
+
+        WiseSaying wiseSaying = AppTestRunner.app.wiseSayingController.wiseSayingRepository.findById(1);
+
+        assertEquals(wiseSaying.author,"작가 1");
+        assertEquals(wiseSaying.content,"명언 1");
+
+    }
 
 
     @Test
