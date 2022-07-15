@@ -60,6 +60,8 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String editAuthor = sc.nextLine().trim();
 
+        wiseSaying.content = editContent;
+        wiseSaying.author = editAuthor;
         wiseSayingRepository.update(wiseSaying);
 
     }
