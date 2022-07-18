@@ -1,42 +1,34 @@
 package com.example.wisesaying;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class WiseSayingRepository {
-    int lastId;
-    List<WiseSaying> wiseSayings;
-    Scanner sc;
+    private WiseSayingTable wiseSayingTable;
+
     public WiseSayingRepository() {
-        lastId = 0;
-        wiseSayings = new ArrayList<>();
+        wiseSayingTable = new WiseSayingTable();
     }
 
-    public void create(WiseSaying wiseSaying){
-        wiseSayings.add(wiseSaying);
+    public WiseSaying add(String content, String author) {
+        return wiseSayingTable.save(content, author);
     }
 
-
-    public void update(WiseSaying wiseSaying){
-        int index = wiseSayings.indexOf(wiseSaying);
-        wiseSayings.set(index, wiseSaying);
-    }
-
-    public void delete(WiseSaying wiseSaying){
-        wiseSayings.remove(wiseSaying);
-    }
-
-    public List<WiseSaying> findAll(){
-        return wiseSayings;
+    public List<WiseSaying> findAll() {
+        return wiseSayingTable.findAll();
     }
 
     public WiseSaying findById(int id) {
-        for (int i = 0; i < wiseSayings.size(); i++) {
-            if (wiseSayings.get(i).id == id)
-                return wiseSayings.get(i);
-        }
+        return wiseSayingTable.findById(id);
+    }
 
-        return null;
+    public boolean modify(int id, String content, String author) {
+        return wiseSayingTable.save(id, content, author);
+    }
+
+    public boolean remove(int id) {
+        return wiseSayingTable.removeById(id);
+    }
+
+    public void dumpToJson() {
+        wiseSayingTable.dumpToJson();
     }
 }
